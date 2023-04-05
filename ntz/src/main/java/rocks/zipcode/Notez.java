@@ -46,8 +46,10 @@ public final class Notez {
             ntzEngine.printResults();
         } else {
             if (argv[0].equals("-r")) {
-
                 ntzEngine.addToCategory("General", argv);
+
+            }else if (argv[0].equals("-c")){
+                ntzEngine.addToCategory(argv[1],argv);
             }
             // this should give you an idea about how to TEST the Notez engine
               // without having to spend lots of time messing with command line arguments.
@@ -63,8 +65,12 @@ public final class Notez {
 
 
     private void addToCategory(String string, String[] argv) {
+        if(filemap.containsKey(string)){
+            filemap.get(string).add(argv[argv.length- 1]);
 
-        filemap.get(string).add(argv[1]);
+        }else{
+            filemap.put(string, new NoteList(argv[argv.length-1]));
+        }
 
     }
 
