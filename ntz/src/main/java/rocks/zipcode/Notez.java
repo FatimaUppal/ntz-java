@@ -52,6 +52,8 @@ public final class Notez {
                 ntzEngine.addToCategory(argv[1],argv);
             }else if (argv[0].equals("-f")){
                 ntzEngine.forgetNote(argv[1], Integer.parseInt(argv[2])-1);
+            }else if (argv[0].equals("-e")){
+                ntzEngine.editNote(argv[1],Integer.parseInt(argv[2])-1, argv[3]);
             }
             // this should give you an idea about how to TEST the Notez engine
               // without having to spend lots of time messing with command line arguments.
@@ -94,7 +96,12 @@ public final class Notez {
         }
 
     }
+    private void editNote(String string, int index, String newMessage){
+        if(filemap.containsKey(string)){
+            filemap.get(string).set(index,newMessage);
+        }
 
+    }
     public void printResults() {
         System.out.println(this.filemap.toString());
     }
