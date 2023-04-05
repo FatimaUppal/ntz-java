@@ -50,6 +50,8 @@ public final class Notez {
 
             }else if (argv[0].equals("-c")){
                 ntzEngine.addToCategory(argv[1],argv);
+            }else if (argv[0].equals("-f")){
+                ntzEngine.forgetNote(argv[1], Integer.parseInt(argv[2])-1);
             }
             // this should give you an idea about how to TEST the Notez engine
               // without having to spend lots of time messing with command line arguments.
@@ -80,6 +82,17 @@ public final class Notez {
 
     private void loadDatabase() {
         filemap.load();
+    }
+    private void forgetNote(String string, int index){
+        if(filemap.containsKey(string)){
+            filemap.get(string).remove(index);
+            if(filemap.get(string).size()==0){
+                filemap.remove(string);
+            }
+        }else{
+            System.out.println("not real category");
+        }
+
     }
 
     public void printResults() {
